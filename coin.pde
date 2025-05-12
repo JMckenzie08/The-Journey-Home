@@ -30,7 +30,7 @@ class Coin {
       if (player.x + player.width > x && player.x < x + tileSize && player.y + player.height > y && player.y < y + tileSize) {//col
         collected = true;
         score++;
-        coinSound.trigger();
+
       }
     } else {
 

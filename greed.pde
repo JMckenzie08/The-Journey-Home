@@ -138,8 +138,7 @@ class Greed {
       if (horizontalOverlap && verticalOverlap) {
         alive = false;
         score += 15;
-        boomSound.trigger();
-        enemyHitSound.trigger();
+
         break;
       }
     }
@@ -169,13 +168,13 @@ class Greed {
         player.velY = player.jumpPower * 1;
         alive = false;
         score+=15;
-        enemyHitSound.trigger();
+
       } else {
         if (player.invincibilityFrames <= 0) {
           player.invincibilityFrames = 60;
           lives--;
           score=0;
-          playerHurtSound.trigger();
+
             player.invincibilityFrames = 60;
             loadLevel();
 

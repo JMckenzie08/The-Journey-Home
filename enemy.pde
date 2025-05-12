@@ -118,7 +118,7 @@ class Enemy {
 
       if (horizontallyAligned && onTop) {
         y = p.y - height;
-        boingSound.trigger();
+
         velY = -15;
         onGround = false;
       }
@@ -138,7 +138,7 @@ class Enemy {
         println("big boom boom");
         alive = false;
         score += 15;
-        boomSound.trigger();
+
         break; //leave after 1 kill
       }
     }
@@ -168,13 +168,13 @@ class Enemy {
         player.velY = player.jumpPower * 1;
         alive = false;
         score+=15;
-        enemyHitSound.trigger();
+
       } else {
         if (player.invincibilityFrames <= 0) {
           player.invincibilityFrames = 60;//anti
           lives--;
           score=0;
-          playerHurtSound.trigger();
+
           if (lives <= 0) {
             gameState = 2;
           } else {

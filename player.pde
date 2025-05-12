@@ -137,7 +137,7 @@ class Player {
           y = p.y - height;
           velY = -24; 
           velX = (player.facingLeft) ? -10 : 10;
-          boingSound.trigger();
+
           onGround = false;
         }
       }
@@ -189,7 +189,7 @@ class Player {
     if (y > 1000) {
       lives--;
       score=0;
-      playerHurtSound.trigger();
+
       println("noob: " + lives);//haha
       loadLevel(currentLevel);
 

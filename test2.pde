@@ -72,16 +72,15 @@ int currentLevel = 0;
 Goal goal;
 
 PImage storyImage;
-AudioPlayer storyMusic;
+
 boolean storyStarted = false;
 PImage bossGrass;
 
 
 
 //music lib
-import ddf.minim.*;
-Minim minim;
-AudioPlayer introMusic, levelOneMusic, levelTwoMusic, levelThreeMusic;
+
+
 float fadeAlpha = 255;
 boolean fading = false;
 int fadeDirection = -1;
@@ -118,28 +117,7 @@ int currentLine = 0;
 boolean inCutscene = false;
 
 //sfx
-AudioSample jumpSound;
-AudioSample coinSound;
-AudioSample enemyHitSound;
-AudioSample playerHurtSound;
-AudioSample boomSound;
-AudioSample boingSound;
-AudioSample bouncerSound;
-AudioSample fireShootSound;
-AudioSample upSound;
-AudioSample clickSound;
-AudioSample wooshSound;
-AudioPlayer gameOverSound;
-AudioSample swordAttack;
-AudioSample roarSound;
-AudioSample laughSound;
-AudioSample bossJump;
-AudioSample pewSound;
-AudioSample riseSound;
-AudioSample stompSound;
-AudioPlayer endMusic;
-AudioSample tntSound;
-AudioSample hitMark;
+
 
 boolean canRestart = false;
 
@@ -149,8 +127,8 @@ void setup() {
   size(1600, 900);
   storyImage = loadImage("1stscene.png");
   storyImage.resize(1600, 900);
-  minim = new Minim(this);
-  storyMusic = minim.loadFile("001_Synthwave_4k.mp3");
+
+
 
 
   //backgrouind images array with resize for stretchy
@@ -190,29 +168,6 @@ void setup() {
 
 
 
-  //sfx loaded
-  jumpSound = minim.loadSample("sfx/jump.mp3");
-  coinSound = minim.loadSample("sfx/coin.mp3");
-  enemyHitSound = minim.loadSample("sfx/hit.wav");
-  playerHurtSound = minim.loadSample("sfx/damage.wav");
-  boomSound = minim.loadSample("sfx/boom.wav");
-  boingSound = minim.loadSample("sfx/boing.wav");
-  bouncerSound = minim.loadSample("sfx/bouncer.wav");
-  fireShootSound=minim.loadSample("sfx/fireShoot.mp3");
-  upSound = minim.loadSample("sfx/1up.mp3");
-  clickSound = minim.loadSample("sfx/click.mp3");
-  wooshSound = minim.loadSample("sfx/woosh.mp3");
-  gameOverSound =minim.loadFile("sfx/15-game-over.mp3");
-  swordAttack = minim.loadSample("boss/sword.mp3");
-  roarSound = minim.loadSample("boss/roar.mp3");
-  laughSound=minim.loadSample("laugh.mp3");
-  bossJump = minim.loadSample("sfx/boss/jump.wav");
-  pewSound = minim.loadSample("boss/pew.wav");
-  riseSound = minim.loadSample("boss/rise.mp3");
-  stompSound = minim.loadSample("boss/boomboom.wav");
-  tntSound = minim.loadSample ("tnt.mp3");
-  hitMark = minim.loadSample("sfx/hitmark.mp3");
-
 
 
 
@@ -223,13 +178,6 @@ void setup() {
 
 
   //all main music
-  introMusic = minim.loadFile("025_A_New_Town.mp3");
-  levelOneMusic = minim.loadFile("020_one_through_five_tinySoundTrack_1-5.mp3");
-  levelTwoMusic = minim.loadFile("015_November_Snow.mp3");
-  levelThreeMusic = minim.loadFile("sfx/battlemusic.mp3");
-  endMusic = minim.loadFile("sfx/finish.mp3");
-
-  introMusic.loop();
 
   buttonFont = createFont("PressStart2P-Regular.ttf", 32);
   textFont(buttonFont);
@@ -299,11 +247,6 @@ void draw() {
           currentLevel = 0;
           selectedLevel = 0;
 
-          levelOneMusic.pause();
-          levelTwoMusic.pause();
-          levelThreeMusic.pause();
-          introMusic.rewind();
-          introMusic.loop();
         }
 
         nextState = -1;
@@ -375,8 +318,7 @@ void drawBossCutscene() {
 
 
   if (!bossCutStar) {
-    storyMusic.rewind();
-    storyMusic.loop();
+
     bossCutStar = true;
   }
 
@@ -412,8 +354,7 @@ void drawMainMenu() {
   drawButton("Choose Level", 1120, 750, 380, 75);
   drawButton("How to Play", width/2 - 200, 750, 400, 80);
   drawButton("Credits", width/2 - 200, 550, 400, 80);
-  gameOverSound.pause();
-  gameOverSound.rewind();
+
 }
 
 void drawHowToPlayScreen() {
@@ -545,7 +486,7 @@ void drawStoryScreen() {
   }
 
   if (!storyStarted) {
-    storyMusic.loop();
+
     storyStarted = true;
     inCutscene = true;
   }
@@ -589,9 +530,7 @@ void drawIntro() {
 }
 
 void drawGameOver() {
-  levelOneMusic.pause();
-  levelThreeMusic.pause();
-  levelTwoMusic.pause();
+
 
   imageMode(CORNER);
   image(deathImage, 0, 0);
@@ -651,11 +590,6 @@ void loadLevel(int levelNum) {
     };
     backgroundImage = backgroundImages[1];
 
-    introMusic.pause();
-    levelTwoMusic.pause();
-    levelThreeMusic.pause();
-    levelOneMusic.rewind();
-    levelOneMusic.loop();
 
     grassImg = loadImage("grass2.png");
     platImg = loadImage("platform.png");
@@ -695,12 +629,7 @@ void loadLevel(int levelNum) {
       stroke(180);
       line(rainX, rainY, rainX + 2, rainY + 10);//more x for sideways falling look
     }
-    levelTwoMusic.rewind();
-    levelTwoMusic.loop();
-    levelOneMusic.pause();
 
-    introMusic.pause();
-    levelThreeMusic.pause();
   } else if (levelNum == 2) {
     levelMap = new String[] {
       "................................",
@@ -723,11 +652,7 @@ void loadLevel(int levelNum) {
       "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGS"
     };
     backgroundImage = level3bg;
-    levelTwoMusic.pause();
-    levelOneMusic.pause();
-    introMusic.pause();
-    levelThreeMusic.rewind();
-    levelThreeMusic.loop();
+
 
     grassImg = loadImage("boss_grass.png");
     platImg = loadImage("platform3.png");
@@ -781,10 +706,7 @@ void loadLevel(int levelNum) {
 void startSecondCutscene() {
 
 
-  introMusic.pause();
-  levelOneMusic.pause();
-  levelTwoMusic.pause();
-  levelThreeMusic.pause();
+
 
   storyStarted = false;
   inSecondCutscene = true;
@@ -797,11 +719,7 @@ void startSecondCutscene() {
 void startBossCutscene() {
   currentLevel++;
   selectedLevel = currentLevel;
-  introMusic.pause();
-  levelOneMusic.pause();
-  levelTwoMusic.pause();
-  levelThreeMusic.pause();
-  storyMusic.rewind();
+
 
   storyStarted = false;
   inCutscene = true;
@@ -915,7 +833,7 @@ void updateGame() {
   if (score>=300) {//1up
     lives++;
     score=0;
-    upSound.trigger();
+
   }
 
   if (lives <= 0 && !fading) {//set fade for death
@@ -923,8 +841,7 @@ void updateGame() {
     nextState = STATE_GAMEOVER;
     fading = true;
     playedGameOverSound = false;
-    gameOverSound.rewind();
-    gameOverSound.loop();
+
     return;
   }
 

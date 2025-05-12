@@ -9,8 +9,7 @@ class PlayerFireball {
     y = startY;
     speedX = facingRight ? 10 : -10;
     heartImg = loadImage("heart.png");
-    pewSound.setGain(-20);//very loud
-    pewSound.trigger();
+
     
   }
 

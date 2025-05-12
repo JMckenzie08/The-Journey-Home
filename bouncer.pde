@@ -53,8 +53,7 @@ class Bouncer {
 
       if ((p.type.equals("solid") || p.type.equals("grass")) && horizontal && vertical) {
         if (velY > 0){
-          bouncerSound.trigger();
-          bouncerSound.setGain(-20);
+
         }
         y = p.y - height;
         velY = -5;
@@ -76,8 +75,7 @@ class Bouncer {
       if (horizontalOverlap && verticalOverlap) {
         alive = false;
         score += 15;
-        boomSound.trigger();
-        enemyHitSound.trigger();
+
         break;
       }
     }
@@ -101,12 +99,12 @@ class Bouncer {
       player.velY = player.jumpPower * 2;
       alive = false;
       score += 25;
-      enemyHitSound.trigger();
+
     } else {
       if (player.invincibilityFrames <= 0) {
         lives--;
         score=0;
-        playerHurtSound.trigger();
+
         player.invincibilityFrames = 60;
         loadLevel();
       }

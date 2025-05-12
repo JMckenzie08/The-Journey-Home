@@ -98,7 +98,6 @@ class Crate {
       if (horizontallyAligned && onTop) {
         y = p.y - height;
         velY = -12;//boing boing
-        boingSound.trigger();
         velX = (player.facingLeft) ? -1.3 : 1.3;//little x boost
         launched = true;
         onGround = false;

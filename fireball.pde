@@ -5,7 +5,6 @@ class Fireball {
   float speedX, speedY;
   boolean alive = true;
 
-  AudioPlayer fireSound;
 
   Fireball(float x, float y, float speedX, float speedY) {
     this.x = x;
@@ -14,15 +13,14 @@ class Fireball {
     this.speedY = speedY;
     fireBallImg = loadImage("fireball2.png");
 
-    fireSound = minim.loadFile("sfx/fire.mp3");
+
     if (currentLevel != 2) {
-      fireSound.loop();
+
 
     }
     
     if (currentLevel == 2) {
-      fireSound.pause();
-      fireSound.rewind();//annoying sound
+
     }
   }
 
@@ -35,10 +33,7 @@ class Fireball {
 
     if (x < cameraX - 100 || x > cameraX + width + 100 || y < -100 || y > height + 100) {//out of bounds of cam not level
       alive = false;
-      if (fireSound != null) {
-        fireSound.pause();
-        fireSound.rewind();
-      }
+
     }
 
 
@@ -48,15 +43,12 @@ class Fireball {
       if (player.invincibilityFrames <= 0) {
         lives--;
         score=0;
-        playerHurtSound.trigger();
+
         player.invincibilityFrames = 60;
         loadLevel(currentLevel);
       }
       alive = false;
-      if (fireSound != null) {
-        fireSound.pause();
-        fireSound.rewind();
-      }
+
     }
   }
 
@@ -72,11 +64,6 @@ class Fireball {
     popMatrix();
   }
   void stopSound() {
-    if (fireSound != null) {
-      fireSound.pause();
-      fireSound.rewind();
-      fireSound.close();
-      fireSound = null;
-    }
+
   }
 }

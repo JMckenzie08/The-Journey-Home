@@ -59,15 +59,14 @@ class FireShooter {
       if (horizontalOverlap && verticalOverlap) {
         alive = false;
         score += 15;
-        boomSound.trigger();
-        enemyHitSound.trigger();
+
         break;
       }
     }
   }
 
   void shoot() {
-    fireShootSound.trigger();
+
     float fireballX = x + width / 2;
     float fireballY = y + height / 2;
 
@@ -99,13 +98,13 @@ class FireShooter {
         player.velY = player.jumpPower * 1;
         alive = false;
         score += 30;
-        enemyHitSound.trigger();
+
       } else {
 
         if (player.invincibilityFrames <= 0) {
           lives--;
           score=0;
-          playerHurtSound.trigger();
+
           player.invincibilityFrames = 60;
 
           loadLevel(currentLevel);

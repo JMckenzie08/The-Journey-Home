@@ -17,7 +17,7 @@ void keyPressed() {
   if (inBossCutscene) {
     bossLineNow++;
 
-    wooshSound.trigger();
+
     if (bossLineNow >= bossCutsceneLines.length) {//same as setup
       inBossCutscene = false;
       inCutscene = false;
@@ -30,9 +30,7 @@ void keyPressed() {
       loadLevel(currentLevel);
       gameState = STATE_GAME;
 
-      storyMusic.pause();
-      levelTwoMusic.rewind();
-      levelTwoMusic.loop();
+
     }
     return;
   }
@@ -42,8 +40,7 @@ void keyPressed() {
 //end game reset
   if (gameState == STATE_GAMEOVER && key != ESC && canRestart) {
     playedGameOverSound = false;
-    gameOverSound.pause();
-    gameOverSound.rewind();
+
     for (Fireball fb : fireballs) {
       fb.stopSound();
     }
@@ -57,9 +54,7 @@ void keyPressed() {
     currentLine = 0;
     currentLine2 = 0;
     inSecondCutscene = false;
-    levelOneMusic.pause();
-    levelTwoMusic.pause();
-    levelThreeMusic.pause();
+
 
     nextState = STATE_MENU;
     fadeDirection = 1;
@@ -68,15 +63,7 @@ void keyPressed() {
   }//very end skip
   if (gameState == STATE_BOSS_END && key == ENTER) {
     gameState = STATE_MENU;
-    levelThreeMusic.pause();
-    levelThreeMusic.rewind();
-    levelOneMusic.pause();
-    levelOneMusic.rewind();
-    levelTwoMusic.pause();
-    levelTwoMusic.rewind();
-    endMusic.pause();
-    endMusic.rewind();
-    introMusic.loop();
+
     lives         = 3;
     score         = 0;
     currentLevel  = 0;
@@ -91,11 +78,10 @@ void keyPressed() {
 //back out in intro
   if (key == ESC) {
     key = 0;
-    wooshSound.trigger();
+
     if (gameState == STATE_CONTROLS || gameState == STATE_LEVEL_SELECT || gameState == STATE_HOW_TO_PLAY || gameState == 9) {
       gameState = STATE_MENU;
-      gameOverSound.pause();
-      gameOverSound.rewind();
+
 
       return;
     }
@@ -113,10 +99,9 @@ void keyPressed() {
     if (!inSecondCutscene) {
       if (currentLine < cutsceneLines.length - 1) {
         currentLine++;
-        wooshSound.trigger();
+
       } else {
-        storyMusic.pause();
-        levelOneMusic.loop();
+
         inCutscene = false;
         gameState = STATE_GAME;
         loadLevel(currentLevel);
@@ -124,10 +109,9 @@ void keyPressed() {
     } else {
       if (currentLine2 < cutsceneLines2.length - 1) {
         currentLine2++;
-        wooshSound.trigger();
+
       } else {
-        storyMusic.pause();
-        levelTwoMusic.loop();
+
         inCutscene = false;
         inSecondCutscene = false;
         currentLevel++;
@@ -147,11 +131,9 @@ void keyPressed() {
   if (gameState == STATE_BOSS_CUTSCENE) {
     if (bossLineNow < bossCutsceneLines.length - 1) {
       bossLineNow++;
-      wooshSound.trigger();
+
     } else {
-      storyMusic.pause();
-      levelThreeMusic.rewind();
-      levelThreeMusic.loop();
+
       inCutscene = false;
       gameState = STATE_GAME;
       if (2 > maxLevel) {
@@ -184,7 +166,7 @@ void keyPressed() {
       player.velX = player.speed;
     } else if ((key == 'w' || keyCode == UP || key == ' ')
       && player.onGround) {
-      jumpSound.trigger();
+
       player.velY = player.jumpPower;
       player.onGround = false;
       player.jumpBufferTimer = player.jumpBufferTime;
@@ -248,16 +230,12 @@ void mousePressed() {
   if (gameState == STATE_MENU) {
     if (overButton(width/2 - 200, height/2, 400, 80)) {
       // start game
-      clickSound.trigger();
+
       selectedLevel = 0;
       currentLevel = 0;
       lives = 3;
       score = 0;
-      introMusic.pause();
-      levelOneMusic.pause();
-      levelTwoMusic.pause();
-      levelThreeMusic.pause();
-      storyMusic.rewind();
+
       storyStarted = false;
       currentLine = 0;
       currentLine2 = 0;
@@ -269,43 +247,41 @@ void mousePressed() {
     } else if (overButton(100, 750, 380, 75)) {
       // contbutton
       gameState = STATE_CONTROLS;
-      clickSound.trigger();
+
     } else if (overButton(width/2 - 200, 750, 400, 80)) {
 
       gameState = STATE_HOW_TO_PLAY;
-      clickSound.trigger();
+
     } else if (overButton(1120, 750, 380, 75)) {
 
       gameState = STATE_LEVEL_SELECT;
-      clickSound.trigger();
+
     } else if (overButton(width/2 - 200, 550, 400, 80)){
       gameState=9;
-      clickSound.trigger();
+
     }
   } else if (gameState == STATE_LEVEL_SELECT) {
     if (mouseX > width/2 - 350 && mouseX < width/2 - 300 && mouseY > height/2 - 25 && mouseY < height/2 + 25) {//overlap with triangle
       selectedLevel--;
       if (selectedLevel < 0) selectedLevel = levelPreviews.length - 1;
-      clickSound.trigger();
+
     }
 
     if (mouseX > width/2 + 300 && mouseX < width/2 + 350 && mouseY > height/2 - 25 && mouseY < height/2 + 25) {//overlap with triangle
       selectedLevel++;
       if (selectedLevel >= levelPreviews.length) selectedLevel = 0;
-      clickSound.trigger();
+
     }
 
     if (overButton(width/2 - 150, height - 250, 300, 60)) {//play button
       if (selectedLevel <= maxLevel) {
-        clickSound.trigger();
+
         currentLevel = selectedLevel;//reset
         lives = 3;
         score = 0;
 
-        introMusic.pause();
-        levelOneMusic.pause();
-        levelTwoMusic.pause();
-        levelThreeMusic.pause();
+
+
 
         loadLevel(currentLevel);
         gameState = STATE_GAME;

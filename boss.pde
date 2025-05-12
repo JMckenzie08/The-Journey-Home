@@ -73,7 +73,7 @@ class Boss {
     fallingImg = loadImage("boss/boss_falling.png");
     landingImg = loadImage("boss/boss_landing.png");
     jumpingImg = loadImage("boss/boss_jumping.png");
-    roarSound.trigger();
+
     lastPhase = 1;
   }
 
@@ -87,7 +87,7 @@ class Boss {
 
 
     if (phase > oldPhase) {
-      laughSound.trigger();
+
     }
     if (phase == 1) updatePhase1();
     else if (phase == 2) updatePhase2();
@@ -146,7 +146,7 @@ class Boss {
       velY= 0;
     }
     if (justLanded && isFalling) {//for anim
-      stompSound.trigger();
+
       shakeTimer= shakeDuration;
       isFalling= false;
       showLanding = true;
@@ -170,12 +170,12 @@ class Boss {
     if (player.invincibilityFrames <= 0 && player.x + player.width > x && player.x < x + width && player.y + player.height > y && player.y < y + height) {//player overlap
       lives--;
       player.invincibilityFrames = 60;//bug fix
-      playerHurtSound.trigger();
+
       loadLevel(currentLevel);
     }
 
     if (phase == 3 && onGround && isFalling) {
-      stompSound.trigger();
+
       showLanding = true;
       landingTimer = landingDuration;
       isFalling = false;
@@ -188,7 +188,7 @@ class Boss {
       boolean bossUnderPlatform = x + width/2 > p.x && x + width/2 < p.x + p.width;//col
       if (playerOnPlatform && bossUnderPlatform && onGround) {//jump if ontop boss
         velY = jumpPower;
-        bossJump.trigger();
+
         return;
       }
     }
@@ -206,7 +206,6 @@ class Boss {
             isDashing = true;
             dashTimer = 0;
 
-            swordAttack.trigger();
           }
         }
       } else {
@@ -233,7 +232,7 @@ class Boss {
     jumpTimer -= 0.3/frameRate;//jump timing
     if (jumpTimer <= 0 && onGround) {
       velY = jumpPower-1;
-      bossJump.trigger();
+
       jumpTimer = jumpCooldown;
     }
     // fireballs
@@ -249,7 +248,7 @@ class Boss {
       showingFire2 = true;//anim
       fire2Timer = fire2Duration;//match cycle
       fireTimer = fireCooldown;
-      fireShootSound.trigger();
+
     }
   }
 
@@ -258,7 +257,7 @@ class Boss {
     jumpTimer -= 0.69/frameRate;
     if (jumpTimer <= 0 && onGround) {
       velY = jumpPower - 8.25;//diff grav
-      bossJump.trigger();
+
       jumpTimer = jumpCooldown;
     }
   }
@@ -358,19 +357,17 @@ class Boss {
 
   void takeDamage(int dmg) {
     health -= dmg;
-    hitMark.trigger();
+
     if (health <= 0) {
       alive = false;
-      tntSound.trigger();
+
 
 
       grassImg       = loadImage("grass2.png");
       platImg        = loadImage("platform.png");//look like lvl 1
       solidImg       = loadImage("box.png");
       backgroundImage = backgroundImages[1];
-      levelThreeMusic.pause();
-      levelThreeMusic.rewind();
-      endMusic.loop();
+
 
 
 
